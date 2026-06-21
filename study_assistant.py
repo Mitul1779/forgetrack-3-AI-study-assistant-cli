@@ -32,6 +32,7 @@ def prompt():
     Format (for follow-up questions):
         small paragraphs with clear explanations and examples.
     keep the length of explanations for follow-up questions under 100 words.
+    do slight formatting in answers to make them more readable in terminal.
     do not ask questions while generating the study plan, just provide the topics and subtopics with their descriptions.
     do not go off-topic unless specified by the user. '''
     return Prompt
@@ -55,14 +56,14 @@ def show_plan(plan):
     print("\n" + "=" * 50)
     print(" " * 15 + "STUDY PLAN")
     print("=" * 50)
-    print(plan)
+    print("\n" + plan + "\n")
     print("=" * 50)
 
 def chat_loop(chat):
     question_count = 0
 
     while True:
-        question = input("Enter a question (or 'exit/quit' to quit): ").strip()
+        question = input("\nEnter a question (or 'exit/quit' to quit): ").strip()
 
         if question.lower() == "exit" or question.lower() == "quit":
             break
@@ -73,7 +74,7 @@ def chat_loop(chat):
 
         try:
             response = chat.send_message(question)
-            print(f"Answer: {response.text}")
+            print(f"\nAnswer: {response.text}")
             question_count += 1
 
         except Exception as e:
